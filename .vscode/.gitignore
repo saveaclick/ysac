@@ -1,0 +1,2 @@
+# ignore launch.json since you might put secrets in this file
+launch.json

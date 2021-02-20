@@ -1,0 +1,40 @@
+service: ysac
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs12.x
+  stage: ${opt:stage}
+  tags:
+    VERSION: ${env:RELEASE_TAG}
+  iamManagedPolicies:
+    - ${env.IAM_APP_POLICY}
+  environment:
+    ROOT_HOST: https://app.savedyouaclick.org
+    REDIS_ENDPOINT: ${env:REDIS_ENDPOINT}
+    REDIS_PASSWORD: ${env:REDIS_PASSWORD}
+    NODE_ENV: ${opt:stage}
+custom:
+  webpack:
+    packager: 'npm' 
+    includeModules:
+      packagePath: "./package.json"
+  customDomain:
+    certificateArn: ${env.CERTIFICATE_ARN}
+    domainName: app.yousavedaclick.org
+    basePath: ""
+    stage: prod
+    createRoute53Record: false
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-domain-manager
+
+functions:
+  app:
+    handler: index.app
+    memorySize: 128
+    name: ysac-app
+    timeout: 20
+    events:
+      - http: 'ANY /{proxy+}'

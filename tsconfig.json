@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+      "allowSyntheticDefaultImports" : true, // allows default imports from modules with no default export
+      "esModuleInterop": true,               // Allows usage of an alternate module import syntax: import foo from 'foo';
+      "strictNullChecks": true,              // enable strict null checks as a best practice
+      "module": "commonjs",                    // specify module code generation
+      "target": "ES6",                       // specify ECMAScript target version
+      "sourceMap": true,
+      "lib": [
+        "es6",
+        "es2016",
+        "dom"                           // Needed for Array.includes support
+      ],
+      "allowJs": true,                       // allow a partial TypeScript and JavaScript codebase,
+      "moduleResolution" : "node",
+      "version" : true,
+      "baseUrl": ".",
+      "outDir": "./",
+      "paths": {
+        "*": ["*"]
+      }
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ],
+}
