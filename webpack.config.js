@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require("webpack-node-externals");
+const CopyPlugin = require("copy-webpack-plugin");
 const slsw = require("serverless-webpack");
 
 module.exports = {
@@ -24,7 +25,12 @@ module.exports = {
     new webpack.IgnorePlugin(/pg-query-stream/, /\/knex\//),
     new webpack.IgnorePlugin(/sqlite3/, /\/knex\//),
     new webpack.IgnorePlugin(/strong-oracle/, /\/knex\//),
-    new webpack.IgnorePlugin(/pg-native/, /\/pg\//)
+    new webpack.IgnorePlugin(/pg-native/, /\/pg\//),
+    new CopyPlugin({
+      patterns : [
+        { from:"templates", to:"templates"}
+      ]
+    })
   ],
   optimization: {
     minimize: 'production' === process.env.NODE_ENV
