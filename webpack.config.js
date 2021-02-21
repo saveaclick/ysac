@@ -7,6 +7,7 @@ module.exports = {
   entry: {
     'index': path.join(__dirname, 'index.ts')
   },
+  mode : slsw.lib.webpack.isLocal ? "development" : "production",
   // This OMITS any node modules from being added to the output file. We can add these into the package (as a separate folder)
   // using 'includeModules' in the serverless.yml config. This is important because we do NOT want to add aws-sdk
   // to the output, since AWS Lambda already has this library as part of the runtime environment.

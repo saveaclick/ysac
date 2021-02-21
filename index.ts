@@ -3,7 +3,11 @@ import serverless from "serverless-http";
 
 const app = express();
 
-app.use('/', (req,res) => res.json({"hello": "world"}));
+// AWS limitation -- there is no "root" endpoint
+// this will work in localdev but not in productionf
+app.get('/', (req,res) => res.json({"hello": "world"}));
+
+app.get('/test', (req, res) => res.json({"test":true, "foo":"bar"}));
 
 
 // catch-all route

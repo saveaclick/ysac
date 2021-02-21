@@ -6,8 +6,9 @@ provider:
   stage: ${opt:stage}
   tags:
     VERSION: ${env:RELEASE_TAG}
-  iamManagedPolicies:
-    - ${env.IAM_APP_POLICY}
+  iam:
+    role: ${env:IAM_EXECUTION_ROLE_ARN}
+    deploymentRole: ${env:IAM_DEPLOYMENT_ROLE_ARN}
   environment:
     ROOT_HOST: https://app.savedyouaclick.org
     REDIS_ENDPOINT: ${env:REDIS_ENDPOINT}
@@ -19,8 +20,8 @@ custom:
     includeModules:
       packagePath: "./package.json"
   customDomain:
-    certificateArn: ${env.CERTIFICATE_ARN}
-    domainName: app.yousavedaclick.org
+    certificateArn: ${env:CERTIFICATE_ARN}
+    domainName: app.savedyouaclick.org
     basePath: ""
     stage: prod
     createRoute53Record: false
