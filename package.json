@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "YouSavedAClick",
   "engines": {
-    "node": "12.20.1"
+    "node": "~12.20.1"
   },
   "scripts": {
     "build": "./node_modules/.bin/webpack",
