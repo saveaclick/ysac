@@ -22,7 +22,8 @@
       ],
       "autoAttachChildProcesses": true,
       "env" : {
-        "RELEASE_TAG" : "development"
+        "RELEASE_TAG" : "development",
+        "NODE_ENV" : "development"
       },
       "console": "integratedTerminal"
     }
