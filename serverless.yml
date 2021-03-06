@@ -2,7 +2,7 @@ service: ysac
 provider:
   name: aws
   region: us-east-1
-  runtime: nodejs12.x
+  runtime: nodejs10.x
   stage: ${opt:stage}
   tags:
     VERSION: ${env:RELEASE_TAG}
@@ -19,6 +19,10 @@ custom:
     packager: 'npm' 
     includeModules:
       packagePath: "./package.json"
+  serverless-layers:
+    dependenciesPath: "./package.json"
+    functions:
+      - app
   customDomain:
     certificateArn: ${env:CERTIFICATE_ARN}
     domainName: app.savedyouaclick.org
@@ -30,6 +34,7 @@ plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-domain-manager
+  - serverless-layers
 
 functions:
   app:

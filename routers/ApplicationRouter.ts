@@ -11,7 +11,8 @@ export default class ApplicationRouter extends AbstractRouter {
     this._router.get('/', this.handleApp);
   }
 
-  private handleApp:RequestHandler = (req, res) => {
-    res.render('form.njk');
+  private handleApp = (req, res) => {
+    const reddit = req.session.reddit;
+    res.render('form.njk', { reddit: JSON.stringify(reddit,null,2) });
   }
 }
