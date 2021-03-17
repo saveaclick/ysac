@@ -23,7 +23,6 @@ export default class Authenticator {
 
   public reddit =  (req, res, next) => {
     const token = req.query && req.query.token;
-    const now = new Date().getTime();
     if (token) {
       // todo: make sure the token is legit more explicitly
       next();
