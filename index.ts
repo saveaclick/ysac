@@ -1,14 +1,20 @@
 import express from "express";
 import serverless from "serverless-http";
+import serveStatic from "serve-static";
 import nunjucks from "nunjucks";
 
 import ApiRouter from "./routers/ApiRouter";
 import ApplicationRouter from "./routers/ApplicationRouter";
 import Authenticator from "./routers/Authenticator";
-
+import path from "path";
 
 const stage:string = process.env.NODE_ENV || 'prod';
 const app = express();
+app.use(
+  "/assets",
+  serveStatic(path.join(__dirname, "./assets"), { index: false })
+);
+
 nunjucks.configure('templates', { autoescape:true, express:app });
 
 // AWS limitation -- there is no "root" endpoint

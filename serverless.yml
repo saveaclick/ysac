@@ -40,6 +40,17 @@ plugins:
   # - serverless-layers
 
 functions:
+  assets:
+    handler: index.app
+    memorySize: 128
+    maximumRetryAttempts: 0
+    name: saveaclick-assets
+    timeout: 3
+    events:
+      - http:
+          path: /assets
+          method: GET
+          cors: false
   app:
     handler: index.app
     memorySize: 128
@@ -51,14 +62,3 @@ functions:
           path: /{proxy+}
           method: ANY
           cors: false
-  # helloworld:
-  #   handler: helloworld.handler
-  #   memorySize: 128
-  #   maximumRetryAttempts: 0
-  #   timeout: 3
-  #   name: hello-world
-  #   events:
-  #     - http:
-  #         path: /helloworld
-  #         method: GET
-  #         cors: false

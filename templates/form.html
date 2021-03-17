@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-y:hidden">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Saved you a click</title>
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+
+<body>
+    <form class="main" id="mainID">
+        <div class="avatar">
+            <img src="/assets/im.png" alt="logo" class="logo">
+            <img src="/assets/night-icon.svg" alt="theme" class="theme" id="themeID">
+        </div>
+        <div class="heading">
+            <h1 id="headingText">Submit to <span id="subreddit">r/savedyouaclick</span></h1>
+        </div>
+        <div class="input-fields">
+            <div class="spoiler-input">
+                <input class="input is-primary" name="spoiler" type="text" placeholder="Post Spoiler">
+            </div>
+            <br> <br>
+            <div class="url-input">
+                <input class="input is-primary" name="url" type="text" placeholder="Post URL">
+            </div>
+        </div>
+        <br>
+        <div class="submit-button">
+            <button class="button is-success is-large">
+      <span>Save someone a click</span>
+    </button>
+        </div>
+    </form>
+    <script src="/assets/theme.js"></script>
+</body>
+
+</html>

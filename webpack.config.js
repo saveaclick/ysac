@@ -29,7 +29,8 @@ module.exports = {
     new webpack.IgnorePlugin(/pg-native/, /\/pg\//),
     new CopyPlugin({
       patterns : [
-        { from:"templates", to:"templates"}
+        { from:"templates", to:"templates"},
+        { from: "assets", to: "assets" }
       ]
     })
   ],

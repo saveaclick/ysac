@@ -17,6 +17,6 @@ export default class ApplicationRouter extends AbstractRouter {
     const models = {
       "token" : req.query.token
     }
-    res.render('form.njk', models);
+    res.render('form.html', models);
   }
 }
