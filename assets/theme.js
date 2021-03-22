@@ -8,7 +8,7 @@ theme.addEventListener("click", function(event) {
         main.classList.remove("light-mode");
         event.preventDefault();
     } else {
-        theme.src = "./assets/day-icon.svg"
+        theme.src = "day-icon.svg"
         main.classList.add("light-mode");
         event.preventDefault();
     }
