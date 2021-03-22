@@ -3,16 +3,20 @@ import AbstractRouter from "./AbstractRouter";
 import Authenticator from "./Authenticator";
 
 export default class ApplicationRouter extends AbstractRouter {
-  public constructor(auth:Authenticator) {
+  public constructor(auth?:Authenticator) {
     super(auth);
 
     // all routes must be authenticated with reddit
-    this._router.use(auth.reddit);
+    if (auth) {
+      this._router.use(auth.reddit);
+    }
     this._router.get('/', this.handleApp);
   }
 
   private handleApp = (req, res) => {
-    const reddit = req.session.reddit;
-    res.render('form.njk', { reddit: JSON.stringify(reddit,null,2) });
+    const models = {
+      "token" : req.query.token
+    }
+    res.render('form.njk', models);
   }
 }

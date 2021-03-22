@@ -7,29 +7,41 @@ import ApplicationRouter from "./routers/ApplicationRouter";
 import Authenticator from "./routers/Authenticator";
 
 
+const stage:string = process.env.NODE_ENV || 'prod';
 const app = express();
-const auth = new Authenticator(app);
 nunjucks.configure('templates', { autoescape:true, express:app });
 
 // AWS limitation -- there is no "root" endpoint
 // this will work in localdev but not in productionf
-app.get('/', (req,res) => res.json({"hello": "world"}));
+app.get(`/test`, (req,res) => res.json({"hello": "world 2"}));
 
-app.use('/form', new ApplicationRouter(auth).getRouter());
-app.use('/api', new ApiRouter(auth).getRouter());
+// Sessions are busted when deployed to stateless AWS lambda
+// https://stackoverflow.com/questions/61255258/migrating-expressjs-app-to-serverless-express-session-problem
+
+const auth = new Authenticator(app);
+app.use(`/form`, new ApplicationRouter(/*auth*/).getRouter());
+app.use(`/api`, new ApiRouter(auth).getRouter());
+
 
 function errorNotification(err, str, req) {
   console.log('ERROR', err);
 }
 // catch-all route
 app.use((req, res) => {
-  console.error(`could not find path ${req.method} ${req.path}`);
-  res.sendStatus(404);
+  const message:string = `could not find path ${req.method} ${req.path}`;
+  console.error(message);
+  res.json({
+    "status" : 404,
+    "message" : message
+  });
 });
 
 app.use(function errorHandler(err, req, res, next) {
   console.error(err);
-  res.sendStatus(500);
+  res.json({
+    "status" : 400,
+    "message" : "some unknonwn error has occurred"
+  });
 });
 
 // package the the express app

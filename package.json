@@ -18,6 +18,7 @@
   },
   "homepage": "https://savedyouaclick.org/",
   "dependencies": {
+    "aws-sdk": "^2.824.0",
     "axios": "^0.21.1",
     "connect-redis": "^5.1.0",
     "express": "^4.17.1",

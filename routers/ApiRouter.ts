@@ -4,10 +4,11 @@ import Authenticator from "./Authenticator";
 
 export default class ApiRouter extends AbstractRouter {
 
-  public constructor(auth:Authenticator) {
+  public constructor(auth?:Authenticator) {
     super(auth);
-
-    this._router.use(auth.reddit);
+    if (auth) {
+      this._router.use(auth.reddit);
+    }
     this._router.post('/submit', this.postSubmission);
   }
 
