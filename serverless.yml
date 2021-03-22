@@ -1,6 +1,7 @@
-service: ysac
+service: saveaclick
 provider:
   name: aws
+  profile: syac
   region: us-east-1
   runtime: nodejs10.x
   stage: ${opt:stage}
@@ -14,15 +15,17 @@ provider:
     REDIS_ENDPOINT: ${env:REDIS_ENDPOINT}
     REDIS_PASSWORD: ${env:REDIS_PASSWORD}
     NODE_ENV: ${opt:stage}
+    REDDIT_CLIENT_ID: ${env:REDDIT_CLIENT_ID}
+    REDDIT_CLIENT_SECRET: ${env:REDDIT_CLIENT_SECRET}
 custom:
   webpack:
     packager: 'npm' 
     includeModules:
       packagePath: "./package.json"
-  serverless-layers:
-    dependenciesPath: "./package.json"
-    functions:
-      - app
+  # serverless-layers:
+  #   dependenciesPath: "./package.json"
+  #   functions:
+  #     - app
   customDomain:
     certificateArn: ${env:CERTIFICATE_ARN}
     domainName: app.savedyouaclick.org
@@ -34,13 +37,28 @@ plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-domain-manager
-  - serverless-layers
+  # - serverless-layers
 
 functions:
   app:
     handler: index.app
     memorySize: 128
-    name: ysac-app
-    timeout: 20
+    maximumRetryAttempts: 0
+    name: saveaclick-app
+    timeout: 25
     events:
-      - http: 'ANY /{proxy+}'
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: false
+  # helloworld:
+  #   handler: helloworld.handler
+  #   memorySize: 128
+  #   maximumRetryAttempts: 0
+  #   timeout: 3
+  #   name: hello-world
+  #   events:
+  #     - http:
+  #         path: /helloworld
+  #         method: GET
+  #         cors: false

@@ -6,7 +6,8 @@ const slsw = require("serverless-webpack");
 
 module.exports = {
   entry: {
-    'index': path.join(__dirname, 'index.ts')
+    'index': path.join(__dirname, 'index.ts'),
+    'helloworld': path.join(__dirname, 'helloworld.ts')
   },
   mode : slsw.lib.webpack.isLocal ? "development" : "production",
   // This OMITS any node modules from being added to the output file. We can add these into the package (as a separate folder)
