@@ -57,7 +57,7 @@ export default class ApiRouter extends AbstractRouter {
       password : process.env.REDDIT_CLIENT_SECRET as string
     };
 
-    getHeadlineAndArchiveUrl(req.query.url).then(([headline, archiveUrl]) => postAsUser(headline || "Headline not detected", req.query.spoiler, archiveUrl, auth.username, auth.password, req.query.token ));
+    getHeadlineAndArchiveUrl(req.query.url as string).then(([headline, archiveUrl]) => postAsUser(headline || "Headline not detected", req.query.spoiler as string, archiveUrl, auth.username, auth.password, req.query.token as string));
 
     res.json({"test":true});
   }
