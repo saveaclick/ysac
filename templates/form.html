@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form class="main" id="mainID">
+    <form class="main" id="mainID" method="POST" action="/api/submit?token={{token}}&spoiler=bitcoin+things&url=https://www.cnbc.com/2021/05/25/bitcoin-crashes-driven-by-big-margin-bets-new-crypto-banking.html">
         <div class="avatar">
             <img src="/assets/im.png" alt="logo" class="logo">
             <img src="/assets/night-icon.svg" alt="theme" class="theme" id="themeID">
@@ -34,6 +34,7 @@
         </div>
     </form>
     <script src="/assets/theme.js"></script>
+    <script src="/routers/ApiRouter.ts"></script>
 </body>
 
 </html>

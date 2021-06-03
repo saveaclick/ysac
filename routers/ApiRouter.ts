@@ -1,7 +1,11 @@
+import { String } from "aws-sdk/clients/acm";
 import { RequestHandler } from "express";
 import snoowrap from "snoowrap";
+import { prefetch } from "webpack";
 import AbstractRouter from "./AbstractRouter";
 import Authenticator from "./Authenticator";
+
+const fetch = require("node-fetch");
 
 export default class ApiRouter extends AbstractRouter {
 
@@ -46,10 +50,15 @@ export default class ApiRouter extends AbstractRouter {
           accessToken: accessToken
       });
       r.submitLink({
-          subredditName: "ysac_dev",
+          subredditName: process.env.SUBREDDIT_NAME || "savedyouaclick",
           title: `${headline} | ${spoiler}`,
           url: archivedUrl
-      }).then(()=>{alert('Posted!')});
+      })
+      .then(()=>res.json({"status":"success"}))
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send("there was an error");
+      });
     }
 
     const auth = {
@@ -58,7 +67,7 @@ export default class ApiRouter extends AbstractRouter {
     };
 
     getHeadlineAndArchiveUrl(req.query.url as string).then(([headline, archiveUrl]) => postAsUser(headline || "Headline not detected", req.query.spoiler as string, archiveUrl, auth.username, auth.password, req.query.token as string));
+    
 
-    res.json({"test":true});
   }
 }
