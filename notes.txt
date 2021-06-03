@@ -1,0 +1,13 @@
+1. get OAuth working. the result will be a redirect to /form?access_token={real_access_token}
+2. get the form submission working
+  a. the result is that the form submits to reddit and posts the message to the subreddit
+  b. alternatively (for test) hard code some other subreddit or your own personal test "subreddit"
+     so that you're not posting test junk to the real subreddit
+
+apirouter:
+      getHeadlineAndArchiveUrl(req.query.url as string).then(([headline, archiveUrl]) => postAsUser(headline || "Headline not detected", req.query.spoiler as string, archiveUrl, auth.username, auth.password, req.query.token as string));
+      - fix req.query.url => get url
+      - query currently only holds token
+
+read about and consider installing:
+https://docs.microsoft.com/en-us/windows/wsl/install-win10

@@ -25,7 +25,7 @@ app.get(`/test`, (req,res) => res.json({"hello": "world 2"}));
 // https://stackoverflow.com/questions/61255258/migrating-expressjs-app-to-serverless-express-session-problem
 
 const auth = new Authenticator(app);
-app.use(`/form`, new ApplicationRouter(/*auth*/).getRouter());
+app.use(`/form`, new ApplicationRouter(auth).getRouter());
 app.use(`/api`, new ApiRouter(auth).getRouter());
 
 

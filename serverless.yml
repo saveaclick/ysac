@@ -11,10 +11,10 @@ provider:
     role: ${env:IAM_EXECUTION_ROLE_ARN}
     deploymentRole: ${env:IAM_DEPLOYMENT_ROLE_ARN}
   environment:
-    ROOT_HOST: https://app.savedyouaclick.org
+    ROOT_HOST: ${env:ROOT_HOST}
     REDIS_ENDPOINT: ${env:REDIS_ENDPOINT}
     REDIS_PASSWORD: ${env:REDIS_PASSWORD}
-    NODE_ENV: ${opt:stage}
+    NODE_ENV: ${env:NODE_ENV}
     REDDIT_CLIENT_ID: ${env:REDDIT_CLIENT_ID}
     REDDIT_CLIENT_SECRET: ${env:REDDIT_CLIENT_SECRET}
 custom:
