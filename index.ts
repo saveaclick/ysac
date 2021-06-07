@@ -8,12 +8,16 @@ import ApplicationRouter from "./routers/ApplicationRouter";
 import Authenticator from "./routers/Authenticator";
 import path from "path";
 
+const bodyParser = require('body-parser');
+
 const stage:string = process.env.NODE_ENV || 'prod';
 const app = express();
 app.use(
   "/assets",
   serveStatic(path.join(__dirname, "./assets"), { index: false })
 );
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
 
 nunjucks.configure('templates', { autoescape:true, express:app });
 

@@ -1,11 +1,12 @@
-import { String } from "aws-sdk/clients/acm";
 import { RequestHandler } from "express";
 import snoowrap from "snoowrap";
-import { prefetch } from "webpack";
 import AbstractRouter from "./AbstractRouter";
 import Authenticator from "./Authenticator";
 
+const { JSDOM } = require("jsdom");
 const fetch = require("node-fetch");
+
+global.document = new JSDOM("http://dev.savedyouaclick.org:3000/api/submit?token={{token}}").window.document;
 
 export default class ApiRouter extends AbstractRouter {
 
@@ -66,7 +67,7 @@ export default class ApiRouter extends AbstractRouter {
       password : process.env.REDDIT_CLIENT_SECRET as string
     };
 
-    getHeadlineAndArchiveUrl(req.query.url as string).then(([headline, archiveUrl]) => postAsUser(headline || "Headline not detected", req.query.spoiler as string, archiveUrl, auth.username, auth.password, req.query.token as string));
+    getHeadlineAndArchiveUrl(req.body.url as string).then(([headline, archiveUrl]) => postAsUser(headline || "Headline not detected", req.body.spoiler as string, archiveUrl, auth.username, auth.password, req.query.token as string));
     
 
   }
