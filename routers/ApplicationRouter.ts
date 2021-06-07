@@ -1,5 +1,4 @@
 import { RequestHandler } from "express";
-import { url } from "node:inspector";
 import AbstractRouter from "./AbstractRouter";
 import Authenticator from "./Authenticator";
 
