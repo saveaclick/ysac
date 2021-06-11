@@ -2,8 +2,8 @@ import { RequestHandler } from "express";
 import snoowrap from "snoowrap";
 import AbstractRouter from "./AbstractRouter";
 import Authenticator from "./Authenticator";
+import JSDOM from "jsdom";
 
-const { JSDOM } = require("jsdom");
 const fetch = require("node-fetch");
 
 global.document = new JSDOM("http://dev.savedyouaclick.org:3000/api/submit?token={{token}}").window.document;
