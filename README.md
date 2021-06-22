@@ -10,6 +10,12 @@ You will need to have installed [Node.js](https://nodejs.org/en/) and [NPM](http
 ```
 This project also uses [Visual Studio Code](https://code.visualstudio.com/) which has support for the JavaScript and TypeScript languages, as well as Node.js debugging.
 
+Once you have these downloaded, you should then open the project in VSCode and in the terminal run
+```
+npm install
+```
+This will then download the dependencies defined in the package.json file and will generate a node_modules folder with the installed modules.
+
 ## How to set up and run locally
 For the next step in setting up this project, you will need to sign into reddit and create a [Reddit OAuth App](https://www.reddit.com/prefs/apps) which will give you a Client ID and Client Secret which you will use in your launch.json file. When you create the new app, you may set the name and description to whatever you want it to be but you must set the "about url" as https://savedyouaclick.org/about.html and the redirect uri as http://dev.savedyouaclick.org:3000/auth/callback. Then just click "create app" and underneath the app name, there will be a code. This code is your REDDIT_CLIENT_ID and the secret is your REDDIT_CLIENT_SECRET.
 
